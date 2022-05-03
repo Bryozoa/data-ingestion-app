@@ -12,8 +12,8 @@ public class Unzipper {
 
     public void getPath {
 
-        Path source = Paths.get("/home/mkyong/zip/test.zip");
-        Path target = Paths.get("/home/mkyong/zip/");
+        Path source = Paths.get("/resources/demo.zip");
+        Path target = Paths.get("/resources/");
 
         try {
 
