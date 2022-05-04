@@ -1,30 +1,15 @@
+package complete.src.main.java.com.example.zipprocessing;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class Unzipper {
-
-    public void getPath {
-
-        Path source = Paths.get("/resources/demo.zip");
-        Path target = Paths.get("/resources/");
-
-        try {
-
-            unzipFolder(source, target);
-            System.out.println("Done");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public static void unzipFolder(Path source, Path target) throws IOException {
 

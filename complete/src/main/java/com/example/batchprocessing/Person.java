@@ -1,4 +1,4 @@
-package com.example.batchprocessing;
+package complete.src.main.java.com.example.batchprocessing;
 
 public class Person {
 
