@@ -19,7 +19,7 @@ public class BatchProcessingApplication {
 		try {
 
 			Unzipper.unzipFolder(source, target);
-			System.out.println("Done");
+			System.out.println("Files were unzipped");
 
 		} catch (IOException e) {
 			e.printStackTrace();

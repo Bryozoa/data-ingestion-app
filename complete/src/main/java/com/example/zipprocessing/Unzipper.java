@@ -21,11 +21,6 @@ public class Unzipper {
             while (zipEntry != null) {
 
                 boolean isDirectory = false;
-                // example 1.1
-                // some zip stored files and folders separately
-                // e.g data/
-                //     data/folder/
-                //     data/folder/file.txt
                 if (zipEntry.getName().endsWith(File.separator)) {
                     isDirectory = true;
                 }
@@ -35,10 +30,6 @@ public class Unzipper {
                 if (isDirectory) {
                     Files.createDirectories(newPath);
                 } else {
-
-                    // example 1.2
-                    // some zip stored file path only, need create parent directories
-                    // e.g data/folder/file.txt
                     if (newPath.getParent() != null) {
                         if (Files.notExists(newPath.getParent())) {
                             Files.createDirectories(newPath.getParent());
@@ -48,18 +39,10 @@ public class Unzipper {
                     // copy files, nio
                     Files.copy(zis, newPath, StandardCopyOption.REPLACE_EXISTING);
 
-                    // copy files, classic
-                    /*try (FileOutputStream fos = new FileOutputStream(newPath.toFile())) {
-                        byte[] buffer = new byte[1024];
-                        int len;
-                        while ((len = zis.read(buffer)) > 0) {
-                            fos.write(buffer, 0, len);
-                        }
-                    }*/
                 }
 
                 zipEntry = zis.getNextEntry();
-
+//TODO rename all files to 1, 2, 3 etc
             }
             zis.closeEntry();
 
