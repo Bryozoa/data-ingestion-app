@@ -2,13 +2,11 @@ package complete.src.main.java.com.example.zipprocessing;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 
 public class FilesRename {
 
-    public void rename() throws IOException {
+    public static void rename(String target) throws IOException {
         // Path of folder where files are located
-        String target = Paths.get("src/main/resources/").toString();
 
         // creating new folder
         File myfolder = new File(target);

@@ -9,36 +9,30 @@ import java.util.Set;
 
 public class MergeCsv {
 
-    public void createOneCsv() throws IOException {
+    public static void createOneCsv(String target) throws IOException {
 
-        //TODO for statement to parse all files from directory
-        File csv1 = new File("src/main/resources/");
-        File csv2 = new File("src/main/resources/");
 
-        List<String> csv1Headers = CsvParser.getHeadersFromACsv(csv1);
-        // csv1Headers.forEach(h -> System.out.print(h + " "));
-        // System.out.println();
-        List<String> csv2Headers = CsvParser.getHeadersFromACsv(csv2);
-        // csv2Headers.forEach(h -> System.out.print(h + " "));
-        // System.out.println();
+        // creating new folder
+        File myfolder = new File(target);
 
-        List<String> allCsvHeaders = new ArrayList<>();
-        allCsvHeaders.addAll(csv1Headers);
-        allCsvHeaders.addAll(csv2Headers);
-        // allCsvHeaders.forEach(h -> System.out.print(h + " "));
-        // System.out.println();
+        File[] file_array = myfolder.listFiles();
+        for (int i = 0; i < file_array.length; i++)
+        {
+            File csv = new File(target);
+            List<String> csvHeaders = CsvParser.getHeadersFromACsv(csv);
 
-        Set<String> uniqueHeaders = new HashSet<>(allCsvHeaders);
-        // uniqueHeaders.forEach(h -> System.out.print(h + " "));
-        // System.out.println();
+            List<String> allCsvHeaders = new ArrayList<>();
+            allCsvHeaders.addAll(csvHeaders);
 
-        List<CsvVo> csv1Records = CsvParser.getRecodrsFromACsv(csv1, csv1Headers);
-        List<CsvVo> csv2Records = CsvParser.getRecodrsFromACsv(csv2, csv2Headers);
+            Set<String> uniqueHeaders = new HashSet<>(allCsvHeaders);
 
-        List<CsvVo> allCsvRecords = new ArrayList<>();
-        allCsvRecords.addAll(csv1Records);
-        allCsvRecords.addAll(csv2Records);
+            List<CsvVo> csvRecords = CsvParser.getRecodrsFromACsv(csv, csvHeaders);
 
-        CsvParser.writeToCsv(new File("C:/csv/csv.csv"), uniqueHeaders, allCsvRecords);
+            List<CsvVo> allCsvRecords = new ArrayList<>();
+            allCsvRecords.addAll(csvRecords);
+
+            CsvParser.writeToCsv(new File(target), uniqueHeaders, allCsvRecords);
+        }
+
     }
 }
