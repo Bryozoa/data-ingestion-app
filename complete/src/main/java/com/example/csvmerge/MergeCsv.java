@@ -57,7 +57,7 @@ public class MergeCsv {
         CsvParser.writeToCsv(myfolder, uniqueHeaders, allCsvRecords);
 
         for(File file: file_array)
-            if (!file.isDirectory() && file.getName() != "schema-all.sql"){
+            if (!file.isDirectory() && !file.getName().equals("schema-all.sql")){
 
                 file.delete();
             }
