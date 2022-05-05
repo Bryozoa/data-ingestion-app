@@ -13,39 +13,48 @@ public class Unzipper {
 
     public static void unzipFolder(Path source, Path target) throws IOException {
 
-        try (ZipInputStream zis = new ZipInputStream(new FileInputStream(source.toFile()))) {
+        //searching .zip file in the directory
+        File searchFile = new File(String.valueOf(target));
+        File[] findZipFile = searchFile.listFiles((dir, name) -> name.endsWith(".zip"));
 
-            // list files in zip
-            ZipEntry zipEntry = zis.getNextEntry();
+        for (File file : findZipFile) {
+            String path = file.getPath();
 
-            while (zipEntry != null) {
+            try (ZipInputStream zis = new ZipInputStream(new FileInputStream(path))) {
 
-                boolean isDirectory = false;
-                if (zipEntry.getName().endsWith(File.separator)) {
-                    isDirectory = true;
-                }
+                // list files in zip
+                ZipEntry zipEntry = zis.getNextEntry();
 
-                Path newPath = zipSlipProtect(zipEntry, target);
+                while (zipEntry != null) {
 
-                if (isDirectory) {
-                    Files.createDirectories(newPath);
-                } else {
-                    if (newPath.getParent() != null) {
-                        if (Files.notExists(newPath.getParent())) {
-                            Files.createDirectories(newPath.getParent());
-                        }
+                    boolean isDirectory = false;
+                    if (zipEntry.getName().endsWith(File.separator)) {
+                        isDirectory = true;
                     }
 
-                    // copy files, nio
-                    Files.copy(zis, newPath, StandardCopyOption.REPLACE_EXISTING);
+                    Path newPath = zipSlipProtect(zipEntry, target);
 
-                }
+                    if (isDirectory) {
+                        Files.createDirectories(newPath);
+                    } else {
+                        if (newPath.getParent() != null) {
+                            if (Files.notExists(newPath.getParent())) {
+                                Files.createDirectories(newPath.getParent());
+                            }
+                        }
 
-                zipEntry = zis.getNextEntry();
+                        // copy files, nio
+                        System.out.println("copy files, nio");
+                        Files.copy(zis, newPath, StandardCopyOption.REPLACE_EXISTING);
+
+                    }
+
+                    zipEntry = zis.getNextEntry();
 //TODO rename all files to 1, 2, 3 etc
-            }
-            zis.closeEntry();
+                }
+                zis.closeEntry();
 
+            }
         }
 
     }

@@ -17,6 +17,8 @@ dependencies {
 	runtimeOnly 'org.hsqldb:hsqldb'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.batch:spring-batch-test'
+	// https://mavenlibs.com/maven/dependency/net.lingala.zip4j/zip4j
+	implementation group: 'net.lingala.zip4j', name: 'zip4j', version: '2.10.0'
 }
 
 test {

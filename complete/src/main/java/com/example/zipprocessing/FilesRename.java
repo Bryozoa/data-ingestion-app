@@ -22,7 +22,7 @@ public class FilesRename {
                         "\\" + file_array[i].getName());
                 String long_file_name = file_array[i].getName();
                 String[] tokens = long_file_name.split("\\s");
-                String new_file_name = tokens[1];
+                String new_file_name = tokens[0];
                 System.out.println(long_file_name);
                 System.out.print(new_file_name);
 

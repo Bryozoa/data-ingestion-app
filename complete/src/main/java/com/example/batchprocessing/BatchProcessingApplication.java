@@ -2,7 +2,7 @@ package complete.src.main.java.com.example.batchprocessing;
 
 import complete.src.main.java.com.example.csvmerge.MergeCsv;
 import complete.src.main.java.com.example.zipprocessing.FilesRename;
-import complete.src.main.java.com.example.zipprocessing.Unzipper;
+import complete.src.main.java.com.example.zipprocessing.Unzipper2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -20,16 +20,20 @@ public class BatchProcessingApplication {
 
 		try {
 
-			Unzipper.unzipFolder(source, target);
+			Unzipper2.unzipFolderZip4j(source, target);
 			System.out.println("Files were unzipped");
+
+			FilesRename.rename(target.toString());
+			System.out.println("Files were renamed");
+
+			MergeCsv.createOneCsv(target.toString());
+			System.out.println("One CSV created");
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		FilesRename.rename(target.toString());
 
-		MergeCsv.createOneCsv(target.toString());
 
 		System.exit(SpringApplication.exit(SpringApplication.run(BatchProcessingApplication.class, args)));
 	}
