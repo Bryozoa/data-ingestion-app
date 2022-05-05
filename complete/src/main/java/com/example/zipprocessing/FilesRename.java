@@ -6,7 +6,6 @@ import java.io.IOException;
 public class FilesRename {
 
     public static void rename(String target) throws IOException {
-        // Path of folder where files are located
 
         // creating new folder
         File myfolder = new File(target);
@@ -26,7 +25,7 @@ public class FilesRename {
                 System.out.println(long_file_name);
                 System.out.print(new_file_name);
 
-                myfile.renameTo(new File(i + ".csv"));
+                myfile.renameTo(new File(target+"\\" + i + ".csv"));
             }
         }
     }

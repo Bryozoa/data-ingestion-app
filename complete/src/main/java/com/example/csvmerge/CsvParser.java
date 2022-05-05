@@ -21,7 +21,7 @@ public class CsvParser {
             }
             CsvVo record = new CsvVo(file.getName());
             String[] lineSplit = line.split(",");
-            for (int i = 0; i < lineSplit.length; i++) {
+            for (int i = 0; i < lineSplit.length-1; i++) {
                 record.put(keys.get(i), lineSplit[i]);
             }
             records.add(record);

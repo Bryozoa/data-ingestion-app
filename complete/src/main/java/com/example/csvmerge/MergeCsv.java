@@ -18,7 +18,7 @@ public class MergeCsv {
         File[] file_array = myfolder.listFiles();
         for (int i = 0; i < file_array.length; i++)
         {
-            File csv = new File(target);
+            File csv = new File(target+"\\" + i + ".csv");
             List<String> csvHeaders = CsvParser.getHeadersFromACsv(csv);
 
             List<String> allCsvHeaders = new ArrayList<>();
