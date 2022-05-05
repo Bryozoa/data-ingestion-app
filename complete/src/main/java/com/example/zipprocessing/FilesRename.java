@@ -7,26 +7,18 @@ public class FilesRename {
 
     public static void rename(String target) throws IOException {
 
-        // creating new folder
         File myfolder = new File(target);
 
         File[] file_array = myfolder.listFiles();
-        for (int i = 0; i < file_array.length; i++)
-        {
+            for (int i = 0; i < file_array.length; i++) {
+                System.out.println("file name: " + file_array[i].getName());
 
-            if (file_array[i].isFile())
-            {
+                if (file_array[i].isFile() && file_array[i].getName() != "schema-all.sql") {
 
-                File myfile = new File(target +
-                        "\\" + file_array[i].getName());
-                String long_file_name = file_array[i].getName();
-                String[] tokens = long_file_name.split("\\s");
-                String new_file_name = tokens[0];
-                System.out.println(long_file_name);
-                System.out.print(new_file_name);
-
-                myfile.renameTo(new File(target+"\\" + i + ".csv"));
+                    File myfile = new File( target +"\\"+ file_array[i].getName());
+                    myfile.renameTo(new File(target + "\\" + i + ".csv"));
+                }
             }
-        }
+
     }
 }

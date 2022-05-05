@@ -1,6 +1,5 @@
 package complete.src.main.java.com.example.batchprocessing;
 
-import complete.src.main.java.com.example.csvmerge.MergeCsv;
 import complete.src.main.java.com.example.zipprocessing.FilesRename;
 import complete.src.main.java.com.example.zipprocessing.Unzipper;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +25,7 @@ public class BatchProcessingApplication {
 			FilesRename.rename(target.toString());
 			System.out.println("Files were renamed");
 
-			MergeCsv.createOneCsv(target.toString());
+		//	MergeCsv.createOneCsv(target.toString());
 			System.out.println("One CSV created");
 
 		} catch (IOException e) {

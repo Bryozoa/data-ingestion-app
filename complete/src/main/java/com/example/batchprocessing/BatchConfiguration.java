@@ -36,9 +36,9 @@ public class BatchConfiguration {
 	public FlatFileItemReader<Person> reader() {
 		return new FlatFileItemReaderBuilder<Person>()
 			.name("personItemReader")
-			.resource(new ClassPathResource("sample-data.csv"))
+			.resource(new ClassPathResource("MergedSCV.csv"))
 			.delimited()
-			.names(new String[]{"firstName", "lastName"})
+			.names(new String[]{"firstName", "lastName","date"})
 			.fieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {{
 				setTargetType(Person.class);
 			}})
@@ -54,7 +54,7 @@ public class BatchConfiguration {
 	public JdbcBatchItemWriter<Person> writer(DataSource dataSource) {
 		return new JdbcBatchItemWriterBuilder<Person>()
 			.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-			.sql("INSERT INTO people (first_name, last_name) VALUES (:firstName, :lastName)")
+			.sql("INSERT INTO people (first_name, last_name, date) VALUES (:firstName, :lastName, :date)")
 			.dataSource(dataSource)
 			.build();
 	}
