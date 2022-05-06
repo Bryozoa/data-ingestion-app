@@ -13,7 +13,8 @@ public class FilesRename {
             for (int i = 0; i < file_array.length; i++) {
                 System.out.println("file name: " + file_array[i].getName());
 
-                if (file_array[i].isFile() && !file_array[i].getName().equals("schema-all.sql")) {
+                if (file_array[i].isFile() && !file_array[i].getName().equals("schema-all.sql") &&
+                        !file_array[i].getName().equals("data.zip")) {
 
                     File myfile = new File( target +"\\"+ file_array[i].getName());
                     myfile.renameTo(new File(target + "\\" + i + ".csv"));

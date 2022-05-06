@@ -15,9 +15,10 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 
 import javax.sql.DataSource;
+import java.io.File;
 
 // tag::setup[]
 @Configuration
@@ -34,16 +35,26 @@ public class BatchConfiguration {
 	// tag::readerwriterprocessor[]
 	@Bean
 	public FlatFileItemReader<Person> reader() {
-		return new FlatFileItemReaderBuilder<Person>()
-			.name("personItemReader")
-			.resource(new ClassPathResource("MergedSCV.csv"))
-			.delimited()
-			.names(new String[]{"firstName", "lastName","date"})
-			.fieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {{
-				setTargetType(Person.class);
-			}})
-			.build();
+
+		FlatFileItemReader<Person> person = new FlatFileItemReader<Person>();
+		for (int i = 0; i < new File("src\\main\\resources").listFiles().length - 2; i++) {
+
+			person = new FlatFileItemReaderBuilder<Person>()
+					.name("personItemReader")
+					.resource(new FileSystemResource("src\\main\\resources\\" + i + ".csv"))
+					.delimited()
+					.names(new String[]{"date", "firstName", "lastName"})
+					.fieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {{
+						setTargetType(Person.class);
+					}})
+					.build();
+
+		}
+		return person;
+
 	}
+
+
 
 	@Bean
 	public PersonItemProcessor processor() {

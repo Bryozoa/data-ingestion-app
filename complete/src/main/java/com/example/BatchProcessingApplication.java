@@ -1,11 +1,11 @@
-package complete.src.main.java.com.example.batchprocessing;
+package complete.src.main.java.com.example;
 
-import complete.src.main.java.com.example.csvmerge.MergeCsv;
 import complete.src.main.java.com.example.zipprocessing.FilesRename;
 import complete.src.main.java.com.example.zipprocessing.Unzipper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,14 +26,22 @@ public class BatchProcessingApplication {
 			FilesRename.rename(target.toString());
 			System.out.println("Files were renamed");
 
-			MergeCsv.createOneCsv(target.toString());
-			System.out.println("One CSV created");
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+		SpringApplication.run(BatchProcessingApplication.class, args);
 
+
+
+		for (int i = 0; i < new File("src\\main\\resources").listFiles().length - 2; i++) {
+			File myObj = new File(source.toString() + i + ".csv");
+			if (myObj.delete()) {
+				System.out.println("Deleted the file: " + myObj.getName());
+			} else {
+				System.out.println("Failed to delete the file.");
+			}
+		}
 
 		System.exit(SpringApplication.exit(SpringApplication.run(BatchProcessingApplication.class, args)));
 	}
