@@ -11,11 +11,5 @@ public class Unzipper {
 
         new ZipFile(source.toFile()).extractAll(target.toString());
 
-//        File myObj = new File(String.valueOf(source));
-//        if (myObj.delete()) {
-//            System.out.println("Deleted the file: " + myObj.getName());
-//        } else {
-//            System.out.println("Failed to delete the file.");
-//        }
     }
 }

@@ -32,8 +32,6 @@ public class BatchProcessingApplication {
 
 		SpringApplication.run(BatchProcessingApplication.class, args);
 
-
-
 		for (int i = 0; i < new File("src\\main\\resources").listFiles().length - 2; i++) {
 			File myObj = new File(source.toString() + i + ".csv");
 			if (myObj.delete()) {
